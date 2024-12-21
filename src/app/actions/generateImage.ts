@@ -8,7 +8,6 @@ export async function generateImage(text: string) {
 
     // Get the base URL from environment variables or default to localhost
     const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
-
     const response = await fetch(`${baseUrl}/api/generate-image`, {
       method: "POST",
       headers: {
