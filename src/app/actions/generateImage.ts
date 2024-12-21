@@ -3,7 +3,7 @@
 export async function generateImage(text: string) {
   try {
     if (!process.env.API_KEY) {
-      throw new Error('API_KEY environment variable is not set');
+      throw new Error("API_KEY environment variable is not set");
     }
 
     // Get the base URL from environment variables or default to localhost
@@ -25,7 +25,14 @@ export async function generateImage(text: string) {
     }
 
     const data = await response.json();
-    return data;
+    if (!data) {
+      throw new Error("No data received from the API");
+    }
+
+    return {
+      success: true,
+      ...data,
+    };
   } catch (error) {
     console.error("Error in generateImage:", error);
     throw error;
